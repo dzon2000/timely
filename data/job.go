@@ -16,9 +16,9 @@ type Job struct {
 
 func (j Job) String() string {
     if j.IsRunning {
-        return fmt.Sprintf("%sACTIVE%s %s, \"%s\" running for %d seconds", color.GREEN, color.RESET, j.Tag, j.Desc, (time.Now().Unix() - j.Time))
+        return fmt.Sprintf("[%s>%s]     %-10s \"%s\" running for %d seconds", color.GREEN, color.RESET, j.Tag, j.Desc, (time.Now().Unix() - j.Time))
     }
-    return fmt.Sprintf("%d, %s, %s, Running? %v", j.Time, j.Tag, j.Desc, j.IsRunning)
+    return fmt.Sprintf("%7d %-10s \"%s\"", j.Time, j.Tag, j.Desc)
 }
 
 func (j Job) AsArray() []string {
