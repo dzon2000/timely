@@ -4,6 +4,7 @@ import (
     "fmt"
     "strconv"
     "github.com/dzon2000/timely/color"
+    "github.com/dzon2000/timely/format"
     "time"
 )
 
@@ -16,9 +17,9 @@ type Job struct {
 
 func (j Job) String() string {
     if j.IsRunning {
-        return fmt.Sprintf("[%s>%s]     %-10s \"%s\" running for %d seconds", color.GREEN, color.RESET, j.Tag, j.Desc, (time.Now().Unix() - j.Time))
+        return fmt.Sprintf("[%s>%s]%s %-10s \"%s\"", color.GREEN, color.RESET, format.FormatSec((time.Now().Unix() - j.Time)), j.Tag, j.Desc)
     }
-    return fmt.Sprintf("%7d %-10s \"%s\"", j.Time, j.Tag, j.Desc)
+    return fmt.Sprintf("%11s %-10s \"%s\"", format.FormatSec(j.Time), j.Tag, j.Desc)
 }
 
 func (j Job) AsArray() []string {
