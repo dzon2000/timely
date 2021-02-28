@@ -3,6 +3,8 @@ package data
 import (
     "fmt"
     "strconv"
+    "github.com/dzon2000/timely/color"
+    "time"
 )
 
 type Job struct {
@@ -13,6 +15,9 @@ type Job struct {
 }
 
 func (j Job) String() string {
+    if j.IsRunning {
+        return fmt.Sprintf("%sACTIVE%s %s, \"%s\" running for %d seconds", color.GREEN, color.RESET, j.Tag, j.Desc, (time.Now().Unix() - j.Time))
+    }
     return fmt.Sprintf("%d, %s, %s, Running? %v", j.Time, j.Tag, j.Desc, j.IsRunning)
 }
 

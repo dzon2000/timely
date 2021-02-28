@@ -24,6 +24,7 @@ func list() {
 
 func stop() {
     jobs := io.Read()
+    anyRunning := false
     for i, job := range jobs {
         if job.IsRunning {
             start := job.Time
@@ -34,7 +35,13 @@ func stop() {
                 Desc: job.Desc,
                 IsRunning: false,
             }
+            anyRunning = true
+            break
         }
+    }
+    if !anyRunning {
+        fmt.Println("Nothing is started...")
+        return
     }
     io.Write(jobs)
 }
@@ -61,7 +68,7 @@ func main() {
         fmt.Println("Listing......")
         list()
     case "start":
-        fmt.Printf("Adding %s to %s", args[1], args[2])
+        fmt.Printf("Adding %s to %s", args[2], args[1])
         start(args[1], args[2])
     case "stop":
         stop()

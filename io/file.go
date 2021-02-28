@@ -57,7 +57,6 @@ func Write(jobs []data.Job) {
     for i, job := range jobs {
         content[i] = job.AsArray()
     }
-    fmt.Println(content)
     writer.WriteAll(content)
     writer.Flush()
     f.Close()
